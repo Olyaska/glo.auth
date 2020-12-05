@@ -15,10 +15,8 @@ const render = function() {
 
         const deleteUser = li.querySelector('.delete');
         deleteUser.addEventListener('click', function() {
-            console.log(i);
-            userData.splice(i, 1);
-            
-            localStorage.userData = JSON.stringify(userData)
+            userData.splice(i, 1);           
+            localStorage.userData = JSON.stringify(userData);
             render();
         });
     });
@@ -54,7 +52,6 @@ const signUp = function() {
           });
         userData.push(user);
         localStorage.userData = JSON.stringify(userData);
-        console.log(user);
         render();
     } else {
         alert('Неправильный формат имени и фамилии');
@@ -66,20 +63,15 @@ const signIn = function() {
         pass = prompt('Введите пароль');
 
     const checkUser = function() {
-        // userData.forEach(function(item) {
         for (let item of userData) { 
             if (item.login === login && item.pass === pass) {
-                console.log(item);
                 userNameElem.textContent = item.name;
-                // debugger
-                return true;
+                return true; // Вопрос: я сначала пробовала использовать forEach, но он всегда возвращал undefined. Не занешь, почему?
             } 
         }
     };
     
-    let check = checkUser();
-    debugger
-    console.log(check);
+    const check = checkUser();
     if (!check){
         alert('Пользователь не найден');
     }
@@ -89,6 +81,3 @@ btnSignUp.addEventListener('click', signUp);
 btnSignIn.addEventListener('click', signIn);
 
 init();
-// if (!signIn) {
-//     alert('Пользователь не найден');
-// }
